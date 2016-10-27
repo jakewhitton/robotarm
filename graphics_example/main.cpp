@@ -22,8 +22,8 @@ bool init();
 void close();
 
 //USER TWEAKABLE VARIABLES
-const int length1 = 300;
-const int length2 = 400;
+const int length1 = 200;
+const int length2 = 350;
 const int margin = 50;
 float a = pi / 3;
 float b = -pi / 6;
@@ -93,13 +93,6 @@ int main(int argc, char* args[]) {
 			aVel = angularVelocity.x;
 			bVel = angularVelocity.y;
 
-			//printf("The angular velocity is <%f, %f>\n", angularVelocity.x, angularVelocity.y);
-
-
-			//printf("The cartesian velocity is <%f, %f>\n", cartesianVelocity.x, cartesianVelocity.y);
-
-			
-
 			//Update a and b
 			a = a + ((float)iterationTime / 1000.0000 * aVel);
 			b = b + ((float)iterationTime / 1000.0000 * bVel);
@@ -112,6 +105,9 @@ int main(int argc, char* args[]) {
 			SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 			drawLine(line1, renderer);
 			drawLine(line2, renderer);
+
+			SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
+			drawLine(Line{line2.end, Vec{line2.end.x + cartesianVelocity.x, line2.end.y + cartesianVelocity.y}}, renderer);
 			
 			//Update screen
 			SDL_RenderPresent( renderer );
